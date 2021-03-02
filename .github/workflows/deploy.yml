@@ -40,7 +40,7 @@ jobs:
     #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Deploy Dev
       run: |
-        python snowchange/cli.py -a ${{ secrets.SNOWFLAKE_ACCOUNT }} -u ${{ secrets.SNOWFLAKE_USER }} -r ${{ secrets.SNOWFLAKE_ROLE_DEV }} -w ${{ secrets.SNOWFLAKE_WH }} -d ${{ secrets.SNOWFLAKE_DB_DEV }} -c ${{ secrets.SNOWFLAKE_DB_DEV }}.metadata --create-change-history-table
+        python snowchange/cli.py -a ${{ secrets.SNOWFLAKE_ACCOUNT }} -u ${{ secrets.SNOWFLAKE_USER }} -r ${{ secrets.SNOWFLAKE_ROLE_DEV }} -w ${{ secrets.SNOWFLAKE_WH }} -d ${{ secrets.SNOWFLAKE_DB_DEV }} -c ${{ secrets.SNOWFLAKE_DB_DEV }}.metadata.change_history --create-change-history-table
       if: github.ref == 'refs/heads/dev'
       env:
         SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
