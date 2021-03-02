@@ -43,19 +43,13 @@ jobs:
     #     python -m unittest -v
     - name: Deploy Dev
       run: |
-        npm install serverless-deployment-bucket --save-dev
-        npm install --save serverless-python-requirements
-        npx serverless deploy --stage dev
+        python snowchange/cli.py -a ${{ secrets.SNOWFLAKE_ACCOUNT }} -u ${{ secrets.SNOWFLAKE_USER }} -r ${{ secrets.SNOWFLAKE_ROLE }} -w ${{ secrets.SNOWFLAKE_WH }} -d ${{ secrets.SNOWFLAKE_DB }}
       if: github.ref == 'refs/heads/dev'
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
     - name: Deploy Prod
       run: |
-        npm install serverless-deployment-bucket --save-dev
-        npm install --save serverless-python-requirements
-        npx serverless deploy --stage prod
-      if: github.ref == 'refs/heads/master'
+        python snowchange/cli.py -a ${{ secrets.SNOWFLAKE_ACCOUNT_PROD }} -u ${{ secrets.SNOWFLAKE_USER_PROD }} -r ${{ secrets.SNOWFLAKE_ROLE_PROD }} -w ${{ secrets.SNOWFLAKE_WH_PROD }} -d ${{ secrets.SNOWFLAKE_DB_PROD }}
+      if: github.ref == 'refs/heads/main'
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD_PROD }}
