@@ -18,7 +18,7 @@ CREATE OR REPLACE DATABASE citibike_john CLONE citibike;
 ```
 3. Run this in your terminal to get up to 1.2:
 ```
-python snowchange/cli.py -a oh_demo20.us-east-2.aws -u john -r dba_citibike -w load_wh -d citibike_john -c citibike_john.metadata.change_history --create-change-history-table
+python snowchange/cli.py -a SNOWFLAKE_ACCOUNT -u john -r dba_citibike -w load_wh -d citibike_john -c citibike_john.metadata.change_history --create-change-history-table
 ```
 4. Now, you want to make your own change. Add the file `V1.3__weather_views.sql` with this inside:
 ```
